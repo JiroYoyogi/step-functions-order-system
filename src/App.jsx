@@ -6,18 +6,18 @@ const API_URL = "";
 function App() {
   const [items, setItems] = useState([
     { id: "abc", name: "ロゴTシャツ", price: 1000, quantity: 1 },
-    // { id: 2, name: 'キャラTシャツ', price: 1500, quantity: 1 },
+    // { id: "def", name: 'キャラTシャツ', price: 1500, quantity: 1 },
   ]);
 
   const cardOptions = [
-    { name: "A", last4digits: "1234", token: "abcd" },
-    { name: "B", last4digits: "5678", token: "efgh" },
+    { name: "A", number: "1234-1234-1234-1234" },
+    { name: "B", number: "5678-5678-5678-5678" },
   ];
   const [selectedCard, setSelectedCard] = useState(cardOptions[0]);
 
   // ユーザー情報の状態管理
-  const [userName, setUserName] = useState("代々木二郎");
-  const [userEmail, setUserEmail] = useState("hoge@fuga.com");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderResult, setOrderResult] = useState(null);
@@ -26,7 +26,6 @@ function App() {
   const handleQuantityChange = (id, newQuantity) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
-        // 0以下の数値にならないように調整
         const val = parseInt(newQuantity) || 0;
         return { ...item, quantity: val < 0 ? 0 : val };
       }
@@ -42,15 +41,20 @@ function App() {
   };
 
   const handleOrderSubmit = async () => {
-    // 二重送信防止
+
     setIsSubmitting(true);
+    
+    // 最低限のチェック
+    if (userName.trim() === "" || userEmail.trim() === "") {
+      setOrderResult({ success: false, message: "名前またはメールアドレスが未入力です" });
+      setIsSubmitting(false);
+      return;
+    }
 
     const orderData = {
-      cardToken: selectedCard.token,
-      amount: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
       userName: userName,
       userEmail: userEmail,
-      itemId: items[0].id,
+      cardNumber: selectedCard.number,
       items: items,
     };
 
@@ -67,7 +71,7 @@ function App() {
       );
 
       const data = await response.json();
-      console.log("AWS Response:", data);
+      console.log(data);
 
       if (data.status === "SUCCEEDED") {
         setOrderResult({ success: true, email: userEmail });
@@ -78,9 +82,10 @@ function App() {
     } catch (error) {
       console.error("Error submitting order:", error);
       setOrderResult({ success: false, message: error.message });
-    } finally {
-      setIsSubmitting(false);
-    }
+    } 
+    
+    setIsSubmitting(false);
+
   };
 
   // 合計金額の計算
@@ -148,7 +153,7 @@ function App() {
           <select value={selectedCard.name} onChange={handleCardChange}>
             {cardOptions.map((card) => (
               <option key={card.name} value={card.name}>
-                カード{card.name} (**** {card.last4digits})
+                カード{card.name} ({card.number})
               </option>
             ))}
           </select>
