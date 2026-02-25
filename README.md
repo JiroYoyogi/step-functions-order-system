@@ -64,9 +64,9 @@
 ```
 {
   "executionId": "{% $states.context.Execution.Id %}",
-  "cardToken": "{% $states.input.cardToken %}",
   "userName": "{% $states.input.userName %}",
   "userEmail": "{% $states.input.userEmail %}",
+  "cardNumber": "{% $states.input.cardNumber %}",
   "itemId": "{% $states.input.items[0].itemId %}",
   "quantity": "{% $states.input.items[0].quantity %}"
 }
@@ -271,7 +271,7 @@ IDを元に取得した商品名と価格を取得して変数に保存
 
 ```
 {
-  "TableName": "sfn-shop-oders",
+  "TableName": "sfn-shop-orders",
   "Key": {
     "id": {
       "S": "{% $executionId %}"
@@ -326,11 +326,11 @@ IDを元に取得した商品名と価格を取得して変数に保存
 
 ### 引数と出力（Step Functions）
 
-FromEmailAddressを上記で登録したものに置き換える
+FromEmailAddressを上記で登録したものに置き換える。送信元に捨てアドを設定すると失敗するので注意
 
 ```json
 {
-  "FromEmailAddress": "hoge@fuga.com",
+  "FromEmailAddress": "hoge@gmail.com",
   "Destination": {
     "ToAddresses": [
       "{% $userEmail %}"
@@ -353,7 +353,20 @@ FromEmailAddressを上記で登録したものに置き換える
 
 ### IAMポリシーのアタッチ
 
-```
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
 ```
 
 ## 決済API作成（モック版）
@@ -441,10 +454,12 @@ POST
 
 #### リクエスト本文
 
+```json
 {
   "cardNumber": "{% $cardNumber %}",
   "amount": "{% $itemPrice * $quantity %}"
 }
+```
 
 #### 引数（引数と出力）
 
