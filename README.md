@@ -567,3 +567,32 @@ arn:aws:states:ap-northeast-1:1234567890:stateMachine:sfn-order-system
 
 ## フロントとの連携
 
+### コードのDL
+
+「Code」を「Donwload ZIP」
+
+### ライブラリのインストール
+
+```
+npm install
+```
+
+### APIのURLを設定
+
+- src/App.jsx
+
+```
+const API_URL = "";
+```
+
+### アプリケーションを起動
+
+```
+npm run dev
+```
+
+### Next !!!
+
+- 商品を複数にする
+- DynamoDB・SES操作のエラーをキャッチする
+- etc
