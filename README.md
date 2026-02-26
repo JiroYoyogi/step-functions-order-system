@@ -72,6 +72,22 @@
 }
 ```
 
+インプットのイメージ ↓
+
+```
+{
+  "userName": "代々木二郎",
+  "userEmail": "hoge@fuga.com",
+  "cardNumber": "1234-1234-1234-1234",
+  "items": [
+    {
+      "itemId": "abc",
+      "quantity": 1
+    }
+  ]
+}
+```
+
 ### DynamoDB: GetItem（在庫確認）
 
 - 状態名：`在庫確認`
