@@ -123,7 +123,7 @@ IDを元に取得した商品名と価格を取得して変数に保存
 
 ```
 {
-  "quantity": "{% $number($states.result.Item.quantity.N) %}",
+  "quantity": "{% $number($states.result.Item.quantity.N) %}"
 }
 ```
 
