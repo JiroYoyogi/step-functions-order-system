@@ -457,7 +457,11 @@ https://abcd.execute-api.ap-northeast-1.amazonaws.com/payments
 POST
 ```
 
-#### 接続
+#### 接続とは？
+
+外部APIを叩くための専用窓口。APIキーなどの秘密情報をAWS側が安全に管理してリクエスト時に自動で差し込んでくれる仕組み
+
+#### 接続（作業）
 
 「接続を表示」でAmazon EventBridgeに移動して「接続を作成」
 
