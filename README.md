@@ -119,13 +119,21 @@ IDを元に取得した商品名と価格を取得して変数に保存
 }
 ```
 
+- 出力：
+
+```
+{
+  "quantity": "{% $number($states.result.Item.quantity.N) %}",
+}
+```
+
 ### Choice（在庫有無）
 
 - 状態名：`在庫有無`
 - Choice Rules - Rule #1
 
 ```
-{% $number($states.input.Item.quantity.N) - $quantity > 0 %}
+{% $states.input.quantity - $quantity > 0 %}
 ```
 
 ### Fail（在庫無し）
