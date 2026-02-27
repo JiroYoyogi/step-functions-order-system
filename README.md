@@ -67,7 +67,7 @@
   "userName": "{% $states.input.userName %}",
   "userEmail": "{% $states.input.userEmail %}",
   "cardNumber": "{% $states.input.cardNumber %}",
-  "itemId": "{% $states.input.items[0].itemId %}",
+  "itemId": "{% $states.input.items[0].id %}",
   "quantity": "{% $states.input.items[0].quantity %}"
 }
 ```
@@ -133,7 +133,7 @@ IDを元に取得した商品名と価格を取得して変数に保存
 - Choice Rules - Rule #1
 
 ```
-{% $states.input.quantity - $quantity > 0 %}
+{% $states.input.quantity - $quantity >= 0 %}
 ```
 
 ### Fail（在庫無し）
