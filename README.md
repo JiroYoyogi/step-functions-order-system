@@ -595,6 +595,8 @@ arn:aws:states:ap-northeast-1:1234567890:stateMachine:sfn-order-system
 - Advanced settings - input - オプション：`$request.body`
 - Advanced settings - Region - オプション：`ap-northeast-1`
 
+#### APIリクエストのテスト
+
 APIをテストする際のインプットのサンプル ↓
 
 ```
