@@ -595,6 +595,22 @@ arn:aws:states:ap-northeast-1:1234567890:stateMachine:sfn-order-system
 - Advanced settings - input - オプション：`$request.body`
 - Advanced settings - Region - オプション：`ap-northeast-1`
 
+APIをテストする際のインプットのサンプル ↓
+
+```
+{
+  "userName": "代々木二郎",
+  "userEmail": "hoge@fuga.com",
+  "cardNumber": "1234-1234-1234-1234",
+  "items": [
+    {
+      "itemId": "abc",
+      "quantity": 1
+    }
+  ]
+}
+```
+
 ## フロントとの連携
 
 ### コードのDL
