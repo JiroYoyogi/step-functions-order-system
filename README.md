@@ -414,7 +414,7 @@ export const handler = async (event) => {
   
   const cardNumber = body.cardNumber;
 
-  if (token === "1234-1234-1234-1234") {
+  if (cardNumber === "1234-1234-1234-1234") {
       return {
         success: true,
         message: "payment successful"
