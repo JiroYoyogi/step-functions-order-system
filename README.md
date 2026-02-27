@@ -83,7 +83,7 @@
   "cardNumber": "1234-1234-1234-1234",
   "items": [
     {
-      "itemId": "abc",
+      "id": "abc",
       "quantity": 1
     }
   ]
