@@ -326,7 +326,7 @@ IDを元に取得した商品名と価格を取得して変数に保存
   "cardNumber": "1234-1234-1234-1234",
   "items": [
     {
-      "itemId": "abc",
+      "id": "abc",
       "quantity": 1
     }
   ]
@@ -608,7 +608,7 @@ APIをテストする際のインプットのサンプル ↓
   "cardNumber": "1234-1234-1234-1234",
   "items": [
     {
-      "itemId": "abc",
+      "id": "abc",
       "quantity": 1
     }
   ]
